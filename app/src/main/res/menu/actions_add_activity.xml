@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id = "@+id/add_bar">
+
+
+    <item
+        android:id="@+id/add_bar_priority_shower"
+        android:title=""
+        app:actionLayout="@layout/priority_shower"
+        app:showAsAction="always"/>
+    <item
+        android:id="@+id/add_bar_priority_up"
+        android:title="@string/add_bar_down"
+        android:icon="@drawable/ic_arrow_upward_black_24dp"
+        app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/add_bar_priority_down"
+        android:title="@string/add_bar_up"
+        android:icon="@drawable/ic_arrow_downward_black_24dp"
+        app:showAsAction="ifRoom"/>
+</menu>
