@@ -40,10 +40,6 @@ public class MemoFragment extends Fragment {
     // TODO: 美化界面，优化UI
     // TODO: 着手制作文档
 
-    // Vars for alterable Options Parameters
-    public int meaningPadding = 20;
-
-
     // Vars for convenience
     private View view;
     private LinearLayout memoList;
@@ -300,6 +296,7 @@ public class MemoFragment extends Fragment {
         multiMode = false;
     }
 
+    // View-Data Plugins
     // Control memoList -- Fill a LinearLayout with memoBook's data
     private void InitList(LinearLayout list) {
         Iterator<Word> iterator = memoBook.iterator();
@@ -322,6 +319,7 @@ public class MemoFragment extends Fragment {
         InitList(list);
     }
 
+    // Data Plugins
     // MemoBook Actions
     private void AddWord(ArrayList<String> meanings, int priority, boolean update) {
         Word word = new Word(meanings, priority);

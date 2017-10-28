@@ -1,33 +1,39 @@
 package com.supplient.stairmemo;
 
-import android.content.Context;
-import android.support.annotation.NonNull;
 import android.util.Log;
 
-import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
-import java.util.Set;
 
 public class MemoBook extends ArrayList<Word> {
 
     private File filesDir;
-    private ArrayList<Word> orderedList;
 
+    // File Constants
     final public static String fileName = "memobook.txt";
 
+    // Interface
+    public Word GetLowestOrderWord() {
+        ArrayList<Word> orderedList = GetOrderedList();
+        if(orderedList == null)
+            return null;
+        if(orderedList.size() == 0)
+            return null;
+
+        Word res = orderedList.get(0);
+        res.IncreaseReciteTime();
+        return res;
+    }
+
+    // Singleton
     private static MemoBook instance;
     static MemoBook GetInstance() {
         return instance;
@@ -39,8 +45,8 @@ public class MemoBook extends ArrayList<Word> {
         return instance;
     }
 
+    // Constructor
     private MemoBook(File filesDir) {
-        orderedList = null;
 
         // Open file or Create File
         this.filesDir = filesDir;
@@ -92,6 +98,31 @@ public class MemoBook extends ArrayList<Word> {
         }
     }
 
+    // Override
+    @Override
+    public boolean add(Word word) {
+        if(!super.add(word))
+            return false;
+        // TODO: Make this more smart... Insert sort can be better...
+        Collections.sort(this, new Comparator<Word>() {
+            @Override
+            public int compare(Word wa, Word wb) {
+                return wa.GetMeanings().get(0).compareTo(wb.GetMeanings().get(0));
+            }
+        });
+        UpdateBook();
+        return true;
+    }
+
+    @Override
+    public Word remove(int index) {
+        Word word = super.remove(index);
+
+        UpdateBook();
+        return word;
+    }
+
+    // Data Plugins
     public void UpdateBook() {
         // Open File or Create New File
         File file = new File(filesDir, fileName);
@@ -127,45 +158,6 @@ public class MemoBook extends ArrayList<Word> {
                 }
             }
         }
-    }
-
-    @Override
-    public boolean add(Word word) {
-        if(!super.add(word))
-            return false;
-        // TODO: Make this more smart... Insert sort can be better...
-        Collections.sort(this, new Comparator<Word>() {
-            @Override
-            public int compare(Word wa, Word wb) {
-                return wa.GetMeanings().get(0).compareTo(wb.GetMeanings().get(0));
-            }
-        });
-        UpdateBook();
-        orderedList = null;
-        return true;
-    }
-
-    @Override
-    public Word remove(int index) {
-        Word word = super.remove(index);
-
-        UpdateBook();
-        orderedList = null;
-        return word;
-    }
-
-    public Word GetLowestOrderWord() {
-        if(orderedList == null) {
-            orderedList = GetOrderedList();
-        }
-
-        if(orderedList.size() == 0)
-            return null;
-
-        Word res = orderedList.get(0);
-        res.AddReciteTime();
-        orderedList = null;
-        return res;
     }
 
     private ArrayList<Word> GetOrderedList() {

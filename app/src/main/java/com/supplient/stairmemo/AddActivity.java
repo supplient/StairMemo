@@ -58,7 +58,7 @@ public class AddActivity extends AppCompatActivity {
         this.menu = menu;
 
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.actions_add_activity, menu);
+        inflater.inflate(R.menu.add_menu, menu);
 
         // Init menu's actions and info
         UpdateShower();
@@ -100,6 +100,8 @@ public class AddActivity extends AppCompatActivity {
         setResult(MemoFragment.RESULT_CANCEL, data);
 
         super.onBackPressed();
+
+        finish();
     }
 
     // View Plugins
@@ -124,7 +126,7 @@ public class AddActivity extends AppCompatActivity {
         return layout;
     }
 
-    // ActivityResult Plugins
+    // Intent Plugins
     protected Intent GetResultIntent() {
         ArrayList<String> meanings = new ArrayList<String>();
         LinearLayout layout = (LinearLayout) findViewById(R.id.linearLayout_add);
@@ -165,7 +167,7 @@ public class AddActivity extends AppCompatActivity {
         }
     }
 
-    private class OnDelButtonClicked implements View.OnClickListener{
+    protected class OnDelButtonClicked implements View.OnClickListener{
         @Override
         public void onClick(View view){
             LinearLayout bigLayout = (LinearLayout) findViewById(R.id.linearLayout_add);

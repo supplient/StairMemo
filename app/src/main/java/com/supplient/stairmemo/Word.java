@@ -18,6 +18,7 @@ public class Word {
     private long orderCached;
 
 
+    // Constructors
     public Word(){
         DefaultInit();
     }
@@ -72,11 +73,12 @@ public class Word {
     }
     public int GetPriority(){return priority;}
 
-    public void AddReciteTime() {
+    public void IncreaseReciteTime() {
         reciteTime++;
         orderCached = -1;
     }
 
+    // Type Plugins
     // ToString
     public String ToString() {
         if(meanings.isEmpty())

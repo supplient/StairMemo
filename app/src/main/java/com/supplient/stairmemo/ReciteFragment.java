@@ -63,24 +63,6 @@ public class ReciteFragment extends Fragment {
         inflater.inflate(R.menu.recite_menu, menu);
     }
 
-    // View Plugins
-    private void addNowMeaningView() {
-        if(nowWord == null)
-            // 当memoBook为空时
-            return;
-        layout.addView(GetMeaningView(nowWord.GetMeanings().get(nowMeaningIndex)));
-    }
-
-    private View GetMeaningView(String s) {
-        TextView textView = new TextView(getActivity());
-        textView.setText(s);
-        textView.setGravity(Gravity.CENTER);
-        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(MATCH_PARENT, 0, 1);
-        textView.setLayoutParams(layoutParams);
-
-        return textView;
-    }
-
     // Logic Parts
     private boolean IterateWord() {
         // return true if word is changed.
@@ -98,6 +80,24 @@ public class ReciteFragment extends Fragment {
         }
         else
             return false;
+    }
+
+    // View Plugins
+    private void addNowMeaningView() {
+        if(nowWord == null)
+            // 当memoBook为空时
+            return;
+        layout.addView(GetMeaningView(nowWord.GetMeanings().get(nowMeaningIndex)));
+    }
+
+    private View GetMeaningView(String s) {
+        TextView textView = new TextView(getActivity());
+        textView.setText(s);
+        textView.setGravity(Gravity.CENTER);
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(MATCH_PARENT, 0, 1);
+        textView.setLayoutParams(layoutParams);
+
+        return textView;
     }
 
     // Private Class
