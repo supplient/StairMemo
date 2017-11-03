@@ -1,6 +1,11 @@
-# 类文档
+# Stair Memo 类文档
 * 创建于2017.10.28
-* 最后修改于2017.10.28
+* 最后修改于2017.11.2
+* 最后修改人：赵智源
+
+## 类关系图
+
+![类关系图](/classUML.png)
 
 ## MainActivity
 MainActivity使用DrawerLayout实现侧栏效果，并包含三个组件：
@@ -29,7 +34,7 @@ MainActivity使用DrawerLayout实现侧栏效果，并包含三个组件：
     3. 调用父类onBackPressed。
 
 ### 私有函数
-(注；仅关乎逻辑核心的私有函数，以下均如此。)
+(注：仅关乎逻辑核心的私有函数，以下均如此。)
 
 * void SwitchToFragment(Fragment fragment)
 
